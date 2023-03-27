@@ -19,7 +19,7 @@ on:
         default: https://lahta.uat.simple-solution.liis.su/api
       api_version:
         description: api version
-        default: 0.0
+        default: v1
 
 jobs:
   build-android:
@@ -41,5 +41,5 @@ jobs:
           uses: actions/upload-artifact@v1
           with:
             name: app-release.apk
-            path: android/app/build/outputs/apk/release/
+            path: android/app/build/outputs/apk/release/app-release.apk
 
