@@ -17,6 +17,9 @@ on:
         description: Host
         required: false
         default: https://lahta.uat.simple-solution.liis.su/api
+      api_version:
+        description: api version
+        default: 0.0
 
 jobs:
   build-android:
@@ -30,8 +33,9 @@ jobs:
          run: chmod +x ./gradlew
         - name: Build Android Release
           run: |
-            export HOST=${{ inputs.host }}
-            export SNIFFER=${{ inputs.sniffer }}
+            export CUSTOM_HOST=${{ inputs.host }}
+            export API_VERSION=${{ inputs.api_version }}
+            export IS_PROXY_ENABLED=${{ inputs.sniffer }}
             cd android && ./gradlew assembleRelease
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
