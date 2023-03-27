@@ -23,9 +23,11 @@ jobs:
       runs-on: ubuntu-latest
       steps: 
         - uses: actions/checkout@v3
-        - name: Install npm dependencies
+        - name: yarn
           run: |
             yarn
+        - name: Make gradlew executable
+         run: chmod +x ./gradlew
         - name: Build Android Release
           run: |
             export HOST=${{ inputs.host }}
