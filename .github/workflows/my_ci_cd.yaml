@@ -3,11 +3,22 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the develop branch
 on:
-  pull_request:
-    branches:
-      - 'main'
-
-
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include  emojis
+      environment:
+        type: environment
+ 
 jobs:
   build_apk:
     name: Run build apk on PR in main
