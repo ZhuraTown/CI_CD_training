@@ -1,16 +1,16 @@
-name: CI
+name: build_apk
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the develop branch
 on:
   workflow_dispatch:
     inputs:
-      name:
-        type: choice
-        description: Who to greet
-        options: 
-        - monalisa
-        - cschleiden
+      sniffer:
+        description: Use sniffer(proxy)
+        type: boolean
+        required: false
+        default: false
+        
       message:
         required: true
       use-emoji:
