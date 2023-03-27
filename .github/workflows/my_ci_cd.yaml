@@ -27,16 +27,22 @@ jobs:
       steps: 
         - uses: actions/checkout@v3
         - name: yarn
-          run: |
-            yarn
+          run: yarn
+          
         - name: Make gradlew executable
-         run: chmod +x ./gradlew
+          run: cd android && chmod +x ./gradlew
+          
+        - name: Decode KEYSTORE
+          run: |
+            echo "${{ secrets.KEYSTORE }}" | base64 -d > android/app/my-upload-key.keystore
+
         - name: Build Android Release
           run: |
             export CUSTOM_HOST=${{ inputs.host }}
             export API_VERSION=${{ inputs.api_version }}
             export IS_PROXY_ENABLED=${{ inputs.sniffer }}
             cd android && ./gradlew assembleRelease
+            
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
