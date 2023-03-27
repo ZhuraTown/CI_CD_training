@@ -11,8 +11,9 @@ on:
         required: false
         default: false
         
-      message:
-        required: true
+      comment:
+        description: Msg to chat Slack(ss-devapp)
+        required: false
       use-emoji:
         type: boolean
         description: Include  emojis
