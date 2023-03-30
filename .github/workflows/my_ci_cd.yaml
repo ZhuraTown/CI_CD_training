@@ -63,6 +63,9 @@ jobs:
           run: |
             echo "RUN TESTS"
             echo "HOST" ${{ inputs.host }}
+            echo "ADB DEVICES"
+            adb devices
+            
 
 
 
