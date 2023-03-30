@@ -57,7 +57,12 @@ jobs:
           uses: actions/download-artifact@v3
           with:
             name: app-release.apk
-            path: /Users/zhva/Desktop/device_test_farm/app-release.apk
+            path: /Users/zhva/Desktop/device_test_farm/
+
         - name: Start Tests
-          run: echo "RUN TESTS"  ${{ inputs.host }}
+          run: |
+            echo "RUN TESTS"
+            echo "HOST" ${{ inputs.host }}
+
+
 
