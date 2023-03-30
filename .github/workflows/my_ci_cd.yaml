@@ -48,9 +48,16 @@ jobs:
           with:
             name: app-release.apk
             path: android/app/build/outputs/apk/release/app-release.apk
+
   run-tests:
-        runs-on: self-hosted
-        steps:
-          - name: Start Tests
-            run: echo "RUN TESTS"
+      runs-on: self-hosted
+      needs: build-android
+      steps:
+        - name: Download build-apk
+          uses: actions/download-artifact@v3
+          with:
+            name: app-release.apk
+            path: /Users/zhva/Desktop/device_test_farm/app-release.apk
+        - name: Start Tests
+          run: echo "RUN TESTS"  ${{ inputs.host }}
 
