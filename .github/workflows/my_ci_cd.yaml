@@ -48,4 +48,9 @@ jobs:
           with:
             name: app-release.apk
             path: android/app/build/outputs/apk/release/app-release.apk
+  run-tests:
+        runs-on: self-hosted
+        steps:
+          - name: Start Tests
+            run: echo "RUN TESTS"
 
