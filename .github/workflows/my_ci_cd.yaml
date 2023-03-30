@@ -20,6 +20,11 @@ on:
       api_version:
         description: api version
         default: v1
+      RunTest:
+        description: run UI-test (on self-hosted-runner)
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   build-android:
@@ -52,6 +57,7 @@ jobs:
   run-tests:
       runs-on: self-hosted
       needs: build-android
+      if: github.event.inputs.RunTest == 'true'
       steps:
         - name: Download build-apk
           uses: actions/download-artifact@v3
