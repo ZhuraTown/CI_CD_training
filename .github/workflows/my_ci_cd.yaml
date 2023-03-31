@@ -1,7 +1,6 @@
 name: build_apk
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the develop branch
+
 on:
   workflow_dispatch:
     inputs:
@@ -54,7 +53,7 @@ jobs:
             name: app-release.apk
             path: android/app/build/outputs/apk/release/app-release.apk
 
-  run-tests:
+  ui-tests:
       runs-on: self-hosted
       needs: build-android
       if: github.event.inputs.RunTest == 'true'
@@ -65,12 +64,25 @@ jobs:
             name: app-release.apk
             path: /Users/zhva/Desktop/device_test_farm/
 
+        - name: Show available devices
+          run: |
+            echo adb devices
+            adb devices
+
+        - name: Install apk to available devices
+          run: |
+            adb -s SYKNW19C10006987 install /Users/zhva/Desktop/device_test_farm/app-release.apk
+
         - name: Start Tests
           run: |
             echo "RUN TESTS"
             echo "HOST" ${{ inputs.host }}
-            echo "ADB DEVICES"
-            adb devices
+
+        - name: Uninstall apk from devices
+          run: |
+            echo "Uninstall apk from devices, apk: com.ci_cd"
+            adb -s SYKNW19C10006987 uninstall com.ci_cd
+
             
 
 
